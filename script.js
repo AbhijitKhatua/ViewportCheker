@@ -24,28 +24,28 @@ const fullscreenIcon = document.getElementById('fullScreen');
 function enterFullscreen() {
     if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen(); /* Safari */
-    } else if (document.documentElement.msRequestFullscreen) {
-        document.documentElement.msRequestFullscreen(); /* IE11 */
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+        document.documentElement.webkitRequestFullscreen();
     }
 }
 
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen(); /* Safari */
-    } else if (document.msExitFullscreen) {
-        document.msExitFullscreen(); /* IE11 */
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
     }
 }
 
-fullscreenIcon.addEventListener('click', () => {
+fullscreenIcon.addEventListener('click', toggleFullscreen);
+fullscreenIcon.addEventListener('touchend', toggleFullscreen);
+
+function toggleFullscreen() {
     const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
     isFullscreen ? exitFullscreen() : enterFullscreen();
     fullscreenIcon.src = isFullscreen ? 'assets/fullscreen.svg' : 'assets/minimize.svg';
     fullscreenIcon.alt = isFullscreen ? 'Full-Screen' : 'Minimize';
-});
+}
+
 
 /*full-screen-event-end*/
