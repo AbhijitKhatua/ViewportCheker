@@ -24,16 +24,20 @@ const fullscreenIcon = document.getElementById('fullScreen');
 function enterFullscreen() {
     if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
-    } else {
+    } else if (document.documentElement.webkitRequestFullscreen) {
         document.documentElement.webkitRequestFullscreen(); /* Safari */
+    } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen(); /* IE11 */
     }
 }
 
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
-    } else {
+    } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen(); /* Safari */
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen(); /* IE11 */
     }
 }
 
@@ -43,4 +47,5 @@ fullscreenIcon.addEventListener('click', () => {
     fullscreenIcon.src = isFullscreen ? 'assets/fullscreen.svg' : 'assets/minimize.svg';
     fullscreenIcon.alt = isFullscreen ? 'Full-Screen' : 'Minimize';
 });
+
 /*full-screen-event-end*/
